@@ -2,18 +2,27 @@ import json
 import boto3
 import os
 
-QUEUE_URL = "https://sqs.us-east-1.amazonaws.com/381492138073/queue1"
-RESULTS_QUEUE_URL = "https://sqs.us-east-1.amazonaws.com/381492138073/queue2"
+from cdktf import App
+from main import MyStack
+
+# Access queue URLs
+queue1_url = os.environ.get('QUEUE1_URL')
+queue2_url = os.environ.get('QUEUE2_URL')
+
+
+QUEUE_URL = queue1_url
+RESULTS_QUEUE_URL = queue2_url
 
 sqs = boto3.client('sqs')
 
 def lambda_handler(event, context):
     try:    
+        message_body = json.loads(event['Records'][0]['body'])
 
         # Extracting parameters
-        num1 = event.get("number1")
-        num2 = event.get("number2")
-        operation = event.get("operation")
+        num1 = message_body['number1']
+        num2 = message_body["number2"]
+        operation = message_body["operation"]
 
         # Check if required parameters are provided
         if num1 is None or num2 is None or operation is None:
