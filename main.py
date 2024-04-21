@@ -1,4 +1,4 @@
-# Code de Florian ROUDAUT
+# Code de Florian ROUDAUT & Arnaud FAVRE-BONVIN
 
 from constructs import Construct
 from cdktf import App, TerraformStack, TerraformOutput, TerraformAsset, AssetType
