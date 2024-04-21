@@ -1,0 +1,4 @@
+constructs
+cdktf
+cdktf-cdktf-provider-aws
+boto3
